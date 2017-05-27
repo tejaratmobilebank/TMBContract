@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 25
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+group = 'com.asredanesh.provider'
+version = '0.9.1'
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name project.getName()
+            description 'A helper library to use Tejarat Mobile Bank provider'
+            url 'https://github.com/tejaratmobilebank/TMBContract'
+            inceptionYear '2017'
+
+            packaging 'aar'
+            groupId project.getGroup()
+            artifactId project.getName()
+            version project.getVersion()
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection 'https://github.com/tejaratmobilebank/TMBContract.git'
+                url 'https://github.com/tejaratmobilebank/TMBContract'
+
+            }
+            developers {
+                developer {
+                    name 'Farid'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = 'tejaratmobilebank'
+    key = 'e09e1f7d66e41ff47de2d70c3187d808e665c76b'
+    configurations = ['archives']
+    pkg {
+        repo = 'TMBContract'
+        name = project.getName()
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/tejaratmobilebank/TMBContract.git'
+        version {
+            name = project.getVersion()
+        }
+    }
+}
+dependencies {
+
+}
